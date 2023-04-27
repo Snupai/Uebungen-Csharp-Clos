@@ -11,11 +11,11 @@ namespace uebungen_oder_so
         }
         static void Menu() 
         {
-            Title = "Main Menu";
             BackgroundColor = ConsoleColor.Black;
             ForegroundColor = ConsoleColor.White;
             while (true)
             {
+                Title = "Main Menu";
                 Clear();
                 WriteLine("Press the key to run the according program.");
                 WriteLine("-------------------------------------------");
