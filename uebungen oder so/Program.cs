@@ -43,6 +43,11 @@ namespace uebungen_oder_so
                         Clear();
                         FSTInf21_L08_KA2.Menu();
                         break;
+                    case 'f':
+                        Clear();
+                        WriteLine("Fun Fact\n\nDie Zahl 86 steht für 32-Bit, weil der Intel 8086-Prozessor der erste 16-Bit-Prozessor war und die Nachfolger des Intel 8086-Prozessors 32-Bit-Prozessoren waren.");
+                        ReadKey();
+                        break;
                     case 't':
                         Clear();
                         Test();
