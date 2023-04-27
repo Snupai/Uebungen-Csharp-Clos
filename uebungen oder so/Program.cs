@@ -11,6 +11,7 @@ namespace uebungen_oder_so
         }
         static void Menu() 
         {
+            Title = "Main Menu";
             BackgroundColor = ConsoleColor.Black;
             ForegroundColor = ConsoleColor.White;
             while (true)
@@ -42,11 +43,16 @@ namespace uebungen_oder_so
                         Clear();
                         FSTInf21_L08_KA2.Menu();
                         break;
+                    case 't':
+                        Clear();
+                        Test();
+                        break;
                 }
             }
         }
         static void Test()
         {
+            Title = "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test";
             //
             // This program demonstrates all colors and backgrounds.
             //
@@ -68,6 +74,7 @@ namespace uebungen_oder_so
             // This is an example to show you how to you WriteColor or WriteLineColor
             //
             WriteLineColor("\nYou can see all possible colors above!\nThis is an example string for <*!red*>background color<*/!*> and <*red*>foreground color<*/*>.");
+            ReadKey();
         }
     }
 }

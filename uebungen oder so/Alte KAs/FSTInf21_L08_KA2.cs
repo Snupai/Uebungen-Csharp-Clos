@@ -6,6 +6,7 @@ namespace uebungen_oder_so
     {
         internal static void Menu()
         {
+            Title = "FSTInf21_L08_KA2 Menu";
             bool zurück = false;
             while (true)
             {

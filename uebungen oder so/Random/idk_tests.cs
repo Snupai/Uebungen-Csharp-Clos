@@ -6,6 +6,7 @@ namespace uebungen_oder_so
     {
         internal static void Menu()
         {
+            Title = "Random tests Menu";
             bool zurück = false;
             while (true)
             {

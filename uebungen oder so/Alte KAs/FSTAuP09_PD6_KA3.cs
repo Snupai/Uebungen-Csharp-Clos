@@ -6,6 +6,7 @@ namespace uebungen_oder_so
     {
         internal static void Menu()
         {
+            Title = "FSTAuP09_PD6_KA3 Menu";
             bool zurück = false;
             while (true)
             {
