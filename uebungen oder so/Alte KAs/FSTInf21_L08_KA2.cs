@@ -18,7 +18,7 @@ namespace uebungen_oder_so
                 WriteLine("'4'\tAufgabe 4: Zahlenraten");
                 WriteLine("'5'\tAufgabe 5: Schaltjahr");
                 WriteLine("'6'\tAufgabe 6: Funktionstabelle");
-                WriteLine("'6'\tAufgabe 7: Verschachtelte Schleifen");
+                WriteLine("'7'\tAufgabe 7: Verschachtelte Schleifen");
                 WriteLine("'0'\tZurück.");
                 WriteLine("-------------------------------------------");
                 char select = ReadKey().KeyChar;
@@ -339,10 +339,11 @@ namespace uebungen_oder_so
                 try { bis = Convert.ToInt32(ReadLine()); } catch { bis = 6; }
                 WriteLine($"\nExponent  |  {basis}^Exponent", ForegroundColor = ConsoleColor.Cyan);
                 WriteLine(new string('-', 30));
+                int count = Convert.ToInt32(Math.Pow(basis, bis));
                 for (int i = von; i <= bis; i++)
                 {
                     var erg = Math.Pow(basis, i);
-                    WriteLine($"{i.ToString().PadLeft(8)}  |  {erg.ToString("N0").PadLeft(8)}");
+                    WriteLine($"{i.ToString().PadLeft(8)}  |  {erg.ToString("N0").PadLeft(count.ToString("N0").Length)}");
                 }
                 ReadKey();
                 BackgroundColor = ConsoleColor.Black;
