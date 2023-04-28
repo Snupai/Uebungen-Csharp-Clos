@@ -13,12 +13,12 @@ namespace uebungen_oder_so
                 Clear();
                 WriteLine("Press the key to run the according program.");
                 WriteLine("-------------------------------------------");
-                WriteLine("| '1'\t6 aus 49.                          |");
-                WriteLine("| '2'\tZahlen raten.                      |");
-                WriteLine("| '3'\tZahlen erraten lassen.             |");
-                WriteLine("| '4'\tRechteck scheiß.                   |");
-                WriteLine("| '5'\t1mal1 is 3.                        |");
-                WriteLine("| '0'\tZurück.                            |");
+                WriteLine("'1'\t6 aus 49.");
+                WriteLine("'2'\tZahlen raten.");
+                WriteLine("'3'\tZahlen erraten lassen.");
+                WriteLine("'4'\tRechteck scheiß.");
+                WriteLine("'5'\t1mal1 is 3.");
+                WriteLine("'0'\tZurück.");
                 WriteLine("-------------------------------------------");
                 char select = ReadKey().KeyChar;
                 switch (select)
@@ -320,8 +320,13 @@ namespace uebungen_oder_so
             }
             static void Eingabe()
             {
-                WriteLine("Gebe ein Topic ein um es der Liste hinzuzufügen:");
-                topics.Add(ReadLine());
+                while (true)
+                {
+                    WriteLine("\bGebe ein Topic ein um es der Liste hinzuzufügen:");
+                    topics.Add(ReadLine());
+                    WriteLine("Topic wurde hinzugefügt. Möchten Sie ein weiteres Topic eingeben? 'j'/'n'");
+                    if (ReadKey().KeyChar != 'j') { break; }
+                }
             }
             static void Ansicht()
             {
