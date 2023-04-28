@@ -337,19 +337,13 @@ namespace uebungen_oder_so
             }
             static void Ansicht()
             {
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 ReadKey();
             }
             static void LöschenNachIndex()
             {
                 int index = 0;
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 while (true)
                 {
                     Write("Nummer des zu löschenden Eintrages: ");
@@ -362,10 +356,7 @@ namespace uebungen_oder_so
             static void LöschenNachInhalt()
             {
                 int index = 0;
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 while (true)
                 {
                     Write("Inhalt des zu löschenden Eintrages: ");
@@ -379,50 +370,33 @@ namespace uebungen_oder_so
             static void Bearbeiten()
             {
                 int index = 0;
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 while (true)
                 {
-                    Write("Nummer des zu bearbeitenden Eintrages: ");
-                    try { index = Convert.ToInt16(ReadLine()); } catch { WriteLine("Deine Eingabe ist keine Zahl."); }
+                    InputToInt("Nummer des zu bearbeitenden Eintrages: ", topics.Count);
                     if (index == 0) { break; }
-                    if (index > topics.Count) { WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden."); }
-                    else
-                    {
-                        Write("Gib den neuen Inhalt ein: ");
-                        var inhalt = ReadLine();
-                        WriteLine($"{index} {topics[index - 1]} geändert zu {inhalt}.");
-                        topics[index - 1] = inhalt;
-                        ReadKey();
-                        break;
-                    }
+                    Write("Gib den neuen Inhalt ein: ");
+                    var inhalt = ReadLine();
+                    WriteLine($"{index} {topics[index - 1]} geändert zu {inhalt}.");
+                    topics[index - 1] = inhalt;
+                    ReadKey();
+                    break;
                 }
             }
             static void Sortieren()
             {
                 WriteLine("Before sorting:");
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 topics.Sort();
                 WriteLine("\nAfter sorting:");
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 ReadKey();
             }
             static void Rangfolge()
             {
                 int indexAlt = 0;
                 int indexNeu = 0;
-                for (int i = 0; i < topics.Count; i++)
-                {
-                    WriteLine(i + 1 + " " + topics[i]);
-                }
+                ListeAusgeben(topics);
                 while (true)
                 {
                     indexAlt = InputToInt("Nummer des zu verschiebenden Eintrages oder '0' zum Abbrechen: ", topics.Count);
@@ -445,7 +419,7 @@ namespace uebungen_oder_so
                     try
                     {
                         number = Convert.ToInt16(ReadLine());
-                        if (number > listCount)
+                        if (number > listCount || number < 0)
                         {
                             WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
                         }
@@ -453,6 +427,13 @@ namespace uebungen_oder_so
 
                     }
                     catch { WriteLine("Deine Eingabe ist keine Zahl."); }
+                }
+            }
+            static void ListeAusgeben(List<string> list)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + list[i]);
                 }
             }
             static void Test()
