@@ -1,4 +1,5 @@
-﻿using static System.Console;
+﻿using System;
+using static System.Console;
 
 namespace uebungen_oder_so
 {
@@ -18,6 +19,7 @@ namespace uebungen_oder_so
                 WriteLine("'3'\tZahlen erraten lassen.");
                 WriteLine("'4'\tRechteck scheiß.");
                 WriteLine("'5'\t1mal1 is 3.");
+                WriteLine("'6'\tTopics Liste.");
                 WriteLine("'0'\tZurück.");
                 WriteLine("-------------------------------------------");
                 char select = ReadKey().KeyChar;
@@ -264,7 +266,7 @@ namespace uebungen_oder_so
             static List<String> topics = new();
             internal static void Menu()
             {
-                Title = "Random tests Menu";
+                Title = "Topics Liste oder so";
                 bool zurück = false;
                 while (true)
                 {
@@ -273,11 +275,12 @@ namespace uebungen_oder_so
                     WriteLine("-------------------------------------------");
                     WriteLine("'1'\tEingabe von Topics.");
                     WriteLine("'2'\tAnsicht der Topics.");
-                    WriteLine("'3'\tTopics löschen.");
-                    WriteLine("'4'\tBearbeiten abändern.");
-                    WriteLine("'5'\tSortieren.");
-                    WriteLine("'6'\tRangfolge");
-                    WriteLine("'7'\tTesting");
+                    WriteLine("'3'\tTopics löschen nach Index.");
+                    WriteLine("'4'\tTopics löschen nach Inhalt.");
+                    WriteLine("'5'\tBearbeiten abändern.");
+                    WriteLine("'6'\tSortieren.");
+                    WriteLine("'7'\tRangfolge");
+                    WriteLine("'8'\tTesting (füllt liste mit 20 random strings)");
                     WriteLine("'0'\tZurück.");
                     WriteLine("-------------------------------------------");
                     char select = ReadKey().KeyChar;
@@ -296,21 +299,25 @@ namespace uebungen_oder_so
                             break;
                         case '3':
                             Clear();
-                            Löschen();
+                            LöschenNachIndex();
                             break;
                         case '4':
                             Clear();
-                            Bearbeiten();
+                            LöschenNachInhalt();
                             break;
                         case '5':
                             Clear();
-                            Sortieren();
+                            Bearbeiten();
                             break;
                         case '6':
                             Clear();
-                            Rangfolge();
+                            Sortieren();
                             break;
                         case '7':
+                            Clear();
+                            Rangfolge();
+                            break;
+                        case '8':
                             Clear();
                             Test();
                             break;
@@ -323,37 +330,158 @@ namespace uebungen_oder_so
                 while (true)
                 {
                     WriteLine("\bGebe ein Topic ein um es der Liste hinzuzufügen:");
-                    topics.Add(ReadLine());
-                    WriteLine("Topic wurde hinzugefügt. Möchten Sie ein weiteres Topic eingeben? 'j'/'n'");
-                    if (ReadKey().KeyChar != 'j') { break; }
+                    var input = ReadLine();
+                    if (input == "") { break; }
+                    topics.Add(input);
                 }
             }
             static void Ansicht()
             {
-                foreach (var item in topics)
+                for (int i = 0; i < topics.Count; i++)
                 {
-                    WriteLine(item);
+                    WriteLine(i + 1 + " " + topics[i]);
                 }
                 ReadKey();
             }
-            static void Löschen()
+            static void LöschenNachIndex()
             {
-                ReadKey();
+                int index = 0;
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + topics[i]);
+                }
+                while (true)
+                {
+                    Write("Nummer des zu löschenden Eintrages: ");
+                    try { index = Convert.ToInt16(ReadLine()); } catch { WriteLine("Deine Eingabe ist keine Zahl."); }
+                    if (index == 0) { break; }
+                    if (index > topics.Count) { WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden."); }
+                    else { WriteLine($"{topics[index - 1]} gelöscht mit Index Nummer {index}."); topics.RemoveAt(index - 1); ReadKey(); break; }
+                }
+            }
+            static void LöschenNachInhalt()
+            {
+                int index = 0;
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + topics[i]);
+                }
+                while (true)
+                {
+                    Write("Inhalt des zu löschenden Eintrages: ");
+                    var inhalt = ReadLine();
+                    if (inhalt == "0") { break; }
+                    index = topics.FindIndex(x => x == inhalt);
+                    if (index == -1) { WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden."); }
+                    else { WriteLine($"{topics[index]} gelöscht mit Index Nummer {index + 1}."); topics.RemoveAt(index); ReadKey(); break; }
+                }
             }
             static void Bearbeiten()
             {
-                ReadKey();
+                int index = 0;
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + topics[i]);
+                }
+                while (true)
+                {
+                    Write("Nummer des zu bearbeitenden Eintrages: ");
+                    try { index = Convert.ToInt16(ReadLine()); } catch { WriteLine("Deine Eingabe ist keine Zahl."); }
+                    if (index == 0) { break; }
+                    if (index > topics.Count) { WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden."); }
+                    else
+                    {
+                        Write("Gib den neuen Inhalt ein: ");
+                        var inhalt = ReadLine();
+                        WriteLine($"{index} {topics[index - 1]} geändert zu {inhalt}.");
+                        topics[index - 1] = inhalt;
+                        ReadKey();
+                        break;
+                    }
+                }
             }
             static void Sortieren()
             {
+                WriteLine("Before sorting:");
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + topics[i]);
+                }
+                topics.Sort();
+                WriteLine("\nAfter sorting:");
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + topics[i]);
+                }
                 ReadKey();
             }
             static void Rangfolge()
             {
-                ReadKey();
+                int indexAlt = 0;
+                int indexNeu = 0;
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    WriteLine(i + 1 + " " + topics[i]);
+                }
+                while (true)
+                {
+                    while (true)
+                    {
+                        Write("Nummer des zu verschiebenden Eintrages oder '0' zum Abbrechen: ");
+                        try
+                        {
+                            indexAlt = Convert.ToInt16(ReadLine());
+                            if (indexAlt > topics.Count)
+                            {
+                                WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
+                            }
+                            else { break; }
+                        }
+                        catch { WriteLine("Deine Eingabe ist keine Zahl."); }
+                    }
+                    if (indexAlt == 0) { break; }
+                    while (true)
+                    {
+                        Write("Neue Nummer des Eintrages oder '0' zum Abbrechen: ");
+                        try
+                        {
+                            indexNeu = Convert.ToInt16(ReadLine());
+                            if (indexNeu > topics.Count)
+                            {
+                                WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
+                            }
+                            else { break; }
+                        }
+                        catch { WriteLine("Deine Eingabe ist keine Zahl."); }
+                    }
+                    if (indexNeu == 0) { break; }
+                    else
+                    {
+                        WriteLine($"{topics[indexAlt - 1]} wurde auf Index Nummer {indexNeu} verschoben.");
+                        topics.Insert(indexNeu - 1, topics[indexAlt - 1]);
+                        topics.RemoveAt(indexAlt);
+                        ReadKey();
+                        break;
+                    }
+                }
             }
             static void Test()
             {
+                Random random = new Random();
+
+                for (int i = 0; i < 20; i++)
+                {
+                    string word = "";
+                    for (int j = 0; j < random.Next(7, 20); j++)
+                    {
+                        word += (char)random.Next('a', 'z' + 1);
+                    }
+                    topics.Add(word);
+                }
+                foreach (var input in topics)
+                {
+                    WriteLine(input);
+                }
                 ReadKey();
             }
         }
