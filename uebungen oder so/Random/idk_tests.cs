@@ -13,12 +13,12 @@ namespace uebungen_oder_so
                 Clear();
                 WriteLine("Press the key to run the according program.");
                 WriteLine("-------------------------------------------");
-                WriteLine("'1'\t6 aus 49.");
-                WriteLine("'2'\tZahlen raten.");
-                WriteLine("'3'\tZahlen erraten lassen.");
-                WriteLine("'4'\tRechteck scheiß.");
-                WriteLine("'5'\t1mal1 is 3.");
-                WriteLine("'0'\tZurück.");
+                WriteLine("| '1'\t6 aus 49.                          |");
+                WriteLine("| '2'\tZahlen raten.                      |");
+                WriteLine("| '3'\tZahlen erraten lassen.             |");
+                WriteLine("| '4'\tRechteck scheiß.                   |");
+                WriteLine("| '5'\t1mal1 is 3.                        |");
+                WriteLine("| '0'\tZurück.                            |");
                 WriteLine("-------------------------------------------");
                 char select = ReadKey().KeyChar;
                 switch (select)
@@ -46,12 +46,16 @@ namespace uebungen_oder_so
                         Clear();
                         Programm5.Main1();
                         break;
+                    case '6':
+                        Clear();
+                        Programm6.Menu();
+                        break;
                 }
                 if (zurück == true) { break; }
             }
         }
 
-        public class Programm1
+        class Programm1
         {
             public static void Main1()
             {
@@ -86,7 +90,7 @@ namespace uebungen_oder_so
                 return lotto.ToArray();
             }
         }
-        public class Programm2
+        class Programm2
         {
             public static void Main1()
             {
@@ -126,7 +130,7 @@ namespace uebungen_oder_so
                 return rnd.Next(0, 100 + 1);
             }
         }
-        public class Programm3
+        class Programm3
         {
             public static void Main1()
             {
@@ -177,7 +181,7 @@ namespace uebungen_oder_so
                 }
             }
         }
-        public class Programm4
+        class Programm4
         {
             public static void Main1()
             {
@@ -207,7 +211,7 @@ namespace uebungen_oder_so
                 return false;
             }
         }
-        public class Programm5
+        class Programm5
         {
             public static void Main1()
             {
@@ -227,7 +231,7 @@ namespace uebungen_oder_so
                             var geg = o++ * 1;
                             if (geg >= 1)
                             {
-                                Write($"{geg.ToString().PadLeft(3)}", ForegroundColor=ConsoleColor.Red);
+                                Write($"{geg.ToString().PadLeft(3)}", ForegroundColor = ConsoleColor.Red);
                                 Write(" |\t", ForegroundColor = ConsoleColor.White);
                             }
                             else
@@ -238,8 +242,8 @@ namespace uebungen_oder_so
                         else if (j == 0 && i >= 1)
                         {
                             var geg = k++ * 1;
-                            Write($"{geg.ToString().PadLeft(3)}",ForegroundColor=ConsoleColor.Red);
-                            Write(" |\t",ForegroundColor=ConsoleColor.White);
+                            Write($"{geg.ToString().PadLeft(3)}", ForegroundColor = ConsoleColor.Red);
+                            Write(" |\t", ForegroundColor = ConsoleColor.White);
                         }
 
                         else if (i >= 1 || j >= 1)
@@ -252,6 +256,99 @@ namespace uebungen_oder_so
                     Write(new string('-', 85));
                     WriteLine();
                 }
+                ReadKey();
+            }
+        }
+        class Programm6
+        {
+            static List<String> topics = new();
+            internal static void Menu()
+            {
+                Title = "Random tests Menu";
+                bool zurück = false;
+                while (true)
+                {
+                    Clear();
+                    WriteLine("Press the key to run the according program.");
+                    WriteLine("-------------------------------------------");
+                    WriteLine("'1'\tEingabe von Topics.");
+                    WriteLine("'2'\tAnsicht der Topics.");
+                    WriteLine("'3'\tTopics löschen.");
+                    WriteLine("'4'\tBearbeiten abändern.");
+                    WriteLine("'5'\tSortieren.");
+                    WriteLine("'6'\tRangfolge");
+                    WriteLine("'7'\tTesting");
+                    WriteLine("'0'\tZurück.");
+                    WriteLine("-------------------------------------------");
+                    char select = ReadKey().KeyChar;
+                    switch (select)
+                    {
+                        case '0':
+                            zurück = true;
+                            break;
+                        case '1':
+                            Clear();
+                            Eingabe();
+                            break;
+                        case '2':
+                            Clear();
+                            Ansicht();
+                            break;
+                        case '3':
+                            Clear();
+                            Löschen();
+                            break;
+                        case '4':
+                            Clear();
+                            Bearbeiten();
+                            break;
+                        case '5':
+                            Clear();
+                            Sortieren();
+                            break;
+                        case '6':
+                            Clear();
+                            Rangfolge();
+                            break;
+                        case '7':
+                            Clear();
+                            Test();
+                            break;
+                    }
+                    if (zurück == true) { break; }
+                }
+            }
+            static void Eingabe()
+            {
+                WriteLine("Gebe ein Topic ein um es der Liste hinzuzufügen:");
+                topics.Add(ReadLine());
+            }
+            static void Ansicht()
+            {
+                foreach (var item in topics)
+                {
+                    WriteLine(item);
+                }
+                ReadKey();
+            }
+            static void Löschen()
+            {
+                ReadKey();
+            }
+            static void Bearbeiten()
+            {
+                ReadKey();
+            }
+            static void Sortieren()
+            {
+                ReadKey();
+            }
+            static void Rangfolge()
+            {
+                ReadKey();
+            }
+            static void Test()
+            {
                 ReadKey();
             }
         }
