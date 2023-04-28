@@ -425,44 +425,34 @@ namespace uebungen_oder_so
                 }
                 while (true)
                 {
-                    while (true)
-                    {
-                        Write("Nummer des zu verschiebenden Eintrages oder '0' zum Abbrechen: ");
-                        try
-                        {
-                            indexAlt = Convert.ToInt16(ReadLine());
-                            if (indexAlt > topics.Count)
-                            {
-                                WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
-                            }
-                            else { break; }
-                        }
-                        catch { WriteLine("Deine Eingabe ist keine Zahl."); }
-                    }
+                    indexAlt = InputToInt("Nummer des zu verschiebenden Eintrages oder '0' zum Abbrechen: ", topics.Count);
                     if (indexAlt == 0) { break; }
-                    while (true)
-                    {
-                        Write("Neue Nummer des Eintrages oder '0' zum Abbrechen: ");
-                        try
-                        {
-                            indexNeu = Convert.ToInt16(ReadLine());
-                            if (indexNeu > topics.Count)
-                            {
-                                WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
-                            }
-                            else { break; }
-                        }
-                        catch { WriteLine("Deine Eingabe ist keine Zahl."); }
-                    }
+                    indexNeu = InputToInt("Neue Nummer des Eintrages oder '0' zum Abbrechen: ", topics.Count);
                     if (indexNeu == 0) { break; }
-                    else
+                    WriteLine($"{topics[indexAlt - 1]} wurde auf Index Nummer {indexNeu} verschoben.");
+                    topics.Insert(indexNeu - 1, topics[indexAlt - 1]);
+                    topics.RemoveAt(indexAlt);
+                    ReadKey();
+                    break;
+                }
+            }
+            static int InputToInt(string writeThis, int listCount)
+            {
+                int number;
+                while (true)
+                {
+                    Write(writeThis);
+                    try
                     {
-                        WriteLine($"{topics[indexAlt - 1]} wurde auf Index Nummer {indexNeu} verschoben.");
-                        topics.Insert(indexNeu - 1, topics[indexAlt - 1]);
-                        topics.RemoveAt(indexAlt);
-                        ReadKey();
-                        break;
+                        number = Convert.ToInt16(ReadLine());
+                        if (number > listCount)
+                        {
+                            WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
+                        }
+                        else { return number; }
+
                     }
+                    catch { WriteLine("Deine Eingabe ist keine Zahl."); }
                 }
             }
             static void Test()
