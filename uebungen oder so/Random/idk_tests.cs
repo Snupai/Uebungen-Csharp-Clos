@@ -373,7 +373,7 @@ namespace uebungen_oder_so
                 ListeAusgeben(topics);
                 while (true)
                 {
-                    InputToInt("Nummer des zu bearbeitenden Eintrages: ", topics.Count);
+                    index = InputToInt("Nummer des zu bearbeitenden Eintrages: ", topics.Count);
                     if (index == 0) { break; }
                     Write("Gib den neuen Inhalt ein: ");
                     var inhalt = ReadLine();
@@ -403,9 +403,10 @@ namespace uebungen_oder_so
                     if (indexAlt == 0) { break; }
                     indexNeu = InputToInt("Neue Nummer des Eintrages oder '0' zum Abbrechen: ", topics.Count);
                     if (indexNeu == 0) { break; }
-                    WriteLine($"{topics[indexAlt - 1]} wurde auf Index Nummer {indexNeu} verschoben.");
-                    topics.Insert(indexNeu - 1, topics[indexAlt - 1]);
-                    topics.RemoveAt(indexAlt);
+                    var item = topics[indexAlt - 1];
+                    topics.RemoveAt(indexAlt - 1);
+                    WriteLine($"{item} wurde auf Index Nummer {indexNeu} verschoben.");
+                    topics.Insert(indexNeu - 1, item);
                     ReadKey();
                     break;
                 }
