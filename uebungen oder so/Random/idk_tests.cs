@@ -11,7 +11,6 @@ namespace uebungen_oder_so
             {
                 return;
             }
-
             var item = list[oldIndex];
             list.RemoveAt(oldIndex);
             list.Insert(newIndex, item);
@@ -66,10 +65,15 @@ namespace uebungen_oder_so
                         Clear();
                         Programm6.Menu();
                         break;
+                    case 't':
+                        Clear();
+                        
+                        break;
                 }
                 if (zurück == true) { break; }
             }
         }
+        
 
         class Programm1
         {
