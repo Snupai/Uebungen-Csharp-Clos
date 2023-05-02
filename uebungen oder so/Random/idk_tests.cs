@@ -420,7 +420,7 @@ namespace uebungen_oder_so
                     try
                     {
                         number = Convert.ToInt16(ReadLine());
-                        if (number > listCount || number < 0)
+                        if (number > listCount || number <= 0)
                         {
                             WriteLine("Nummer nicht in der Liste vorhanden.\nBitte gebe eine andere Nummer ein oder '0' zum Beenden.");
                         }
