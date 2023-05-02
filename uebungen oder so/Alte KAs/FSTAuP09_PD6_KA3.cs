@@ -55,7 +55,6 @@ namespace uebungen_oder_so
                 if (zurück == true) { break; }
             }
         }
-
         public class Programm1
         {
             public static void Main1()

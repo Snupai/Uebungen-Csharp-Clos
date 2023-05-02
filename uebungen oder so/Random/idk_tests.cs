@@ -3,8 +3,22 @@ using static System.Console;
 
 namespace uebungen_oder_so
 {
-    internal class idk_tests
+    public static class ListExtensions
     {
+        public static void Move<T>(this List<T> list, int oldIndex, int newIndex)
+        {
+            if (oldIndex == newIndex)
+            {
+                return;
+            }
+
+            var item = list[oldIndex];
+            list.RemoveAt(oldIndex);
+            list.Insert(newIndex, item);
+        }
+    }
+    internal class idk_tests
+    {   
         internal static void Menu()
         {
             Title = "Random tests Menu";
@@ -403,10 +417,11 @@ namespace uebungen_oder_so
                     if (indexAlt == 0) { break; }
                     indexNeu = InputToInt("Neue Nummer des Eintrages oder '0' zum Abbrechen: ", topics.Count);
                     if (indexNeu == 0) { break; }
-                    var item = topics[indexAlt - 1];
-                    topics.RemoveAt(indexAlt - 1);
-                    WriteLine($"{item} wurde auf Index Nummer {indexNeu} verschoben.");
-                    topics.Insert(indexNeu - 1, item);
+                    //var item = topics[indexAlt - 1];
+                    //topics.RemoveAt(indexAlt - 1);
+                    topics.Move(indexAlt-1, indexNeu-1);
+                    WriteLine($"{topics[indexNeu-1]} wurde auf Index Nummer {indexNeu} verschoben.");
+                    //topics.Insert(indexNeu - 1, item);
                     ReadKey();
                     break;
                 }
