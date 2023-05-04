@@ -67,7 +67,7 @@ namespace uebungen_oder_so
                         break;
                     case 't':
                         Clear();
-                        
+                        Test.Test_oder_so();
                         break;
                 }
                 if (zurück == true) { break; }
@@ -421,11 +421,8 @@ namespace uebungen_oder_so
                     if (indexAlt == 0) { break; }
                     indexNeu = InputToInt("Neue Nummer des Eintrages oder '0' zum Abbrechen: ", topics.Count);
                     if (indexNeu == 0) { break; }
-                    //var item = topics[indexAlt - 1];
-                    //topics.RemoveAt(indexAlt - 1);
                     topics.Move(indexAlt-1, indexNeu-1);
                     WriteLine($"{topics[indexNeu-1]} wurde auf Index Nummer {indexNeu} verschoben.");
-                    //topics.Insert(indexNeu - 1, item);
                     ReadKey();
                     break;
                 }
@@ -473,6 +470,35 @@ namespace uebungen_oder_so
                 {
                     WriteLine(input);
                 }
+                ReadKey();
+            }
+        }
+        class Test
+        {
+            internal static void Test_oder_so()
+            {
+                int[] dates_num = new int[3];
+                Write($"Heute ist {DateTime.Now.Date:dddd}, den {DateTime.Now.Date:dd.MM}\n");
+                ReadKey();
+                string date = ReadLine();
+                string[] dates = date.Split(".");
+                WriteLine(dates[0]);
+                WriteLine(dates[1]);
+                WriteLine(dates[2]);
+                for (int i = 0; i < dates.Length; i++)
+                {
+                    try { dates_num[i] = Convert.ToInt16(dates[i]); } catch { }
+                }
+                if  (dates_num[2] <= 23 && dates_num[2] > 0)
+                {
+                    dates_num[2] += 2000;
+                }
+                else if (dates_num[2] < 100 && dates_num[2] > 23)
+                {
+                    dates_num[2] += 1900;
+                }
+                DateTime date_time = new DateTime(dates_num[2], dates_num[1], dates_num[0], 0, 0, 0);
+                WriteLine($"\n{date_time.Date:yyyy}, {date_time.Date:dd.MM} sprich {date_time.Date:D}");
                 ReadKey();
             }
         }
